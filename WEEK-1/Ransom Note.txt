@@ -1,0 +1,46 @@
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        
+// length of Strings 
+    int n1 = ransomNote.length(); 
+    int n2 = magazine.length(); 
+  
+    // hash-table to store count 
+    HashMap<Integer,Integer> mp =  
+        new HashMap<Integer,Integer>(); 
+  
+    // store count of each character 
+    for (int i = 0; i < n2; i++) 
+    { 
+        if(mp.containsKey((int)magazine.charAt(i))) 
+        { 
+            mp.put((int)magazine.charAt(i), mp.get((int)magazine.charAt(i)) + 1); 
+        } 
+        else
+        { 
+            mp.put((int)magazine.charAt(i), 1); 
+        } 
+    } 
+        
+        
+         // traverse and check for every character 
+    for (int i = 0; i < n1; i++) 
+    { 
+  
+         
+        if(mp.containsKey((int)ransomNote.charAt(i)) && mp.get((int)ransomNote.charAt(i))>0)  
+        { 
+            mp.put((int)ransomNote.charAt(i), mp.get((int)ransomNote.charAt(i)) - 1); 
+        } 
+  
+       
+        else 
+        { 
+            return false; 
+        } 
+    } 
+  
+    return true; 
+        
+    }
+}
