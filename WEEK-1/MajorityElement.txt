@@ -1,0 +1,42 @@
+class Solution {
+    
+    
+	public  int findCandidate(int arr[],int n) {
+		
+		int majElem=0; int count=1;
+		int i;
+		
+		for( i=1;i<n;i++) {
+			
+			if(arr[majElem]==arr[i]) {
+				count++;
+			}
+
+			else {
+				count--;
+			}
+			if(count==0) {
+				
+				majElem=i;
+				count=1;
+			}
+		}
+		
+		return arr[majElem];
+	}
+    
+    public int majorityElement(int[] nums) {
+        int candidateElment=findCandidate(nums,nums.length);
+		int count=0;
+		
+		for(int i=0;i<nums.length;i++) {
+			if(candidateElment==nums[i])
+				count++;
+		}
+		
+		if(count>nums.length/2)
+			return candidateElment;
+		
+		return -1;
+    }
+}

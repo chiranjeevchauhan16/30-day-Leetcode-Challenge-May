@@ -1,0 +1,27 @@
+class Solution {
+    public boolean checkStraightLine(int[][] coordinates) {
+        
+        if(coordinates.length==2)
+            return true;
+        
+        boolean res=true;
+        
+        
+        for(int i=0;i<coordinates.length-2;i++){
+            
+        int t1=coordinates[i][0],s1=coordinates[i][1];
+        int t2=coordinates[i+1][0],s2=coordinates[i+1][1];
+        int t3=coordinates[i+2][0],s3=coordinates[i+2][1];
+            
+            
+        int p= (s2-s1)*(t3-t2);
+        int q=(s3-s2)*(t2-t1);
+            
+            res=p==q?true:false;
+        
+        }
+        
+        return res;
+        
+    }
+}
