@@ -1,0 +1,70 @@
+class Solution {
+    
+    
+    
+     int[] DIR = new int[]{0, 1, 0, -1, 0};
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+        
+        ////
+        /*
+        int temp=image[sr][sc];
+        image[sr][sc]=newColor;
+        Queue<int []> queue=new LinkedList();
+       
+        queue.offer(new int[]{sr,sc});
+        
+        int [][] dirs={{0,1},{1,0},{0,-1},{-1,0}};
+        
+        while(!queue.isEmpty()){
+            int size=queue.size();
+            for(int index=0;index<size;index++){
+                int [] point = queue.poll();
+                for(int[] dir:dirs){
+                    int x=point[0] +dir[0];
+                    int y=point[1] + dir[1];
+                    
+                    if(x<0||x>= image.length||y<0 || y>=image[0].length
+                      || image[x][y]==newColor||image[x][y]!=temp)
+                        continue;
+                    
+                    image[x][y]=newColor;
+                    queue.offer(new int[] {x,y});
+                }
+            }
+        }
+        return image;
+    */
+        
+        /////
+        
+        
+        
+       
+//         int m = image.length, n = image[0].length;
+//         if (image[sr][sc] == newColor) return image;
+//         int oldColor = image[sr][sc];
+//         image[sr][sc] = newColor; // set new color
+//         for (int i = 0; i < 4; i++) {
+//             int nr = sr + DIR[i], nc = sc + DIR[i+1];
+//             if (nr < 0 || nr == m || nc < 0 || nc == n || image[nr][nc] != oldColor) continue;
+//             floodFill(image, nr, nc, newColor);
+//         }
+//         return image;
+        int color = image[sr][sc];
+        if (color != newColor) dfs(image, sr, sc, color, newColor);
+        return image;
+        
+}
+//     Time Complexity: O(N)O(N), where NN is the number of pixels in the image. We might process every pixel.
+
+// Space Complexity: O(N)O(N), the size of the implicit call stack when calling dfs.
+     public void dfs(int[][] image, int r, int c, int color, int newColor) {
+        if (image[r][c] == color) {
+            image[r][c] = newColor;
+            if (r >= 1) dfs(image, r-1, c, color, newColor);
+            if (c >= 1) dfs(image, r, c-1, color, newColor);
+            if (r+1 < image.length) dfs(image, r+1, c, color, newColor);
+            if (c+1 < image[0].length) dfs(image, r, c+1, color, newColor);
+        }
+    }
+}

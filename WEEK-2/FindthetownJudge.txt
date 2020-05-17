@@ -1,0 +1,40 @@
+class Solution {
+    public int findJudge(int N, int[][] trust) {
+     
+//         int result=-1;
+        
+//         int [] trustArr=new int[N+1];
+        
+//         for(int []arr: trust){
+            
+//             trustArr[arr[1]]++;
+//             trustArr[arr[0]]--;
+            
+//         }
+        
+//         int max = Arrays.stream(arr).max().getAsInt(); 
+        
+//         if(max==N-1){
+//                 result=i;
+//             }
+//         for(int i=1;i<=N;i++){
+            
+//             if(trustArr[i]==N-1){
+//                 result=i;
+//             }
+//         }
+//         return result;
+        
+      if(N == 1) return 1;
+        if(trust.length == 0) return -1;
+        int[] a = new int[N+1];
+        for(int[] rel : trust) {
+            a[rel[0]]--;
+            a[rel[1]]++;
+        }
+        for(int i = 1;i < N+1;i++) {
+            if(a[i] ==N-1) return i;
+        }
+        return -1;
+    }
+}
