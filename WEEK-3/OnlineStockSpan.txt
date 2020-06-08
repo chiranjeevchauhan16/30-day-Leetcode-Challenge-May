@@ -1,0 +1,50 @@
+class StockSpanner {
+
+    Stack<MyStock> stocks;
+    
+    public StockSpanner() {
+        stocks=new Stack<>();
+    }
+    
+         /*
+   Let's trace the algorithm together on [100, 80, 60, 70, 60, 75, 85]
+   1. calling StockSpanner.next(100) should result in first element in our stack will be (100, 1) (s.size() == 1)
+   2. calling StockSpanner.next(80) should result in second element in our stack will be (80, 1) (s.size() == 2)
+   3. calling StockSpanner.next(60) should result in third element in our stack will be (60, 1) (s.size() == 3)
+   4. Now on calling StockSpanner.next(70) we should add span of (60) + 1 {the current day}
+   and remove it from stack (70, 2) (s.size() == 3)
+   5. Now on calling StockSpanner.next(60) result in fourth element in our stack will be (60, 1) (s.size() == 4)
+   6. Now on calling StockSpanner.next(75) we should add span of (60) and (70) + 1 {the current day}
+   and remove it from stack : (75, 4) (s.size() == 3)
+   7. Now on calling StockSpanner.next(85) we should add span of (75) and (80) + 1 {the current day}
+   and remove it from stack : (85, 6) (s.size() == 2)
+   */    
+    public int next(int price) {
+         int count=1;
+             
+        while(!stocks.isEmpty() && price>=stocks.peek().price){
+            
+            count+=stocks.pop().weight;
+            
+        }
+             
+        stocks.push(new MyStock(price,count));
+        return count;
+        }
+    
+    
+    public class MyStock {
+        public final int price , weight;
+        public MyStock(int price, int weight){
+            this.price = price;
+            this.weight = weight;
+        }
+    }
+    
+}
+
+/**
+ * Your StockSpanner object will be instantiated and called as such:
+ * StockSpanner obj = new StockSpanner();
+ * int param_1 = obj.next(price);
+ */

@@ -1,0 +1,40 @@
+class Solution {
+    
+    public int[][] kClosest(int[][] points, int K) {
+        
+        List<int[]> res=new ArrayList<>();
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<Pair>
+            (Comparator.<Pair> comparingDouble(p1 -> Math.sqrt(p1.a*p1.a + p1.b*p1.b)));
+                                  
+            
+            // ((p1, p2) -> (int)Math.sqrt(p1.a*p1.a + p1.b*p1.b) - (int)Math.sqrt(p2.a*p2.a + p2.b*p2.b));
+        
+           for(int[] point:points)
+           {
+               pq.offer(new Pair(point[0],point[1]));
+           }
+        
+        
+        while(K>0){
+            
+            Pair temp=pq.poll();
+            res.add(new int []{temp.a,temp.b});
+            K--;
+        }
+        return res.toArray(new int[res.size()][]);
+    }
+    
+    
+     
+    public class Pair {
+        public final int a , b;
+        public Pair(int a, int b){
+            this.a = a;
+            this.b = b;
+        }
+    }
+    
+    
+    
+}
